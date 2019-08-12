@@ -12,7 +12,7 @@ export default [
     type: "clear-last"
   },
   {
-    display: "/",
+    display: "\u00f7",
     id: "divide",
     className: "operator simple",
     type: "operator"
