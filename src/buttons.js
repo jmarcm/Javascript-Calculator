@@ -24,7 +24,7 @@ export default [
   },
   {
     display: "8",
-    id: "height",
+    id: "eight",
     className: "number simple"
   },
   {
@@ -55,7 +55,7 @@ export default [
   },
   {
     display: "-",
-    id: "substract",
+    id: "subtract",
     className: "operator simple",
     type: "operator"
   },
@@ -82,7 +82,7 @@ export default [
   },
   {
     display: "0",
-    id: "one",
+    id: "zero",
     className: "number double"
   },
   {
