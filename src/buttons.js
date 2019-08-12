@@ -3,13 +3,13 @@ export default [
     display: "AC",
     id: "clear",
     className: "clear double",
-    type: "clear-all"
+    type: "clearAll"
   },
   {
     display: "C",
     id: "clear-last",
     className: "number simple",
-    type: "clear-last"
+    type: "clearLast"
   },
   {
     display: "\u00f7",
@@ -20,17 +20,20 @@ export default [
   {
     display: "7",
     id: "seven",
-    className: "number simple"
+    className: "number simple",
+    type: "number"
   },
   {
     display: "8",
     id: "eight",
-    className: "number simple"
+    className: "number simple",
+    type: "number"
   },
   {
     display: "9",
     id: "nine",
-    className: "number simple"
+    className: "number simple",
+    type: "number"
   },
   {
     display: "X",
@@ -41,17 +44,20 @@ export default [
   {
     display: "4",
     id: "four",
-    className: "number simple"
+    className: "number simple",
+    type: "number"
   },
   {
     display: "5",
     id: "five",
-    className: "number simple"
+    className: "number simple",
+    type: "number"
   },
   {
     display: "6",
     id: "six",
-    className: "number simple"
+    className: "number simple",
+    type: "number"
   },
   {
     display: "-",
@@ -62,17 +68,20 @@ export default [
   {
     display: "1",
     id: "one",
-    className: "number simple"
+    className: "number simple",
+    type: "number"
   },
   {
     display: "2",
     id: "two",
-    className: "number simple"
+    className: "number simple",
+    type: "number"
   },
   {
     display: "3",
     id: "three",
-    className: "number simple"
+    className: "number simple",
+    type: "number"
   },
   {
     display: "+",
@@ -83,12 +92,14 @@ export default [
   {
     display: "0",
     id: "zero",
-    className: "number double"
+    className: "number double",
+    type: "number"
   },
   {
     display: ".",
     id: "decimal",
-    className: "number simple"
+    className: "number simple",
+    type: "number"
   },
   {
     display: "=",
