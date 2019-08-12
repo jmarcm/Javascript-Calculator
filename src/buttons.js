@@ -2,17 +2,20 @@ export default [
   {
     display: "AC",
     id: "clear",
-    className: "clear double"
+    className: "clear double",
+    type: "clear-all"
   },
   {
     display: "C",
     id: "clear-last",
-    className: "number simple"
+    className: "number simple",
+    type: "clear-last"
   },
   {
     display: "/",
     id: "divide",
-    className: "operator simple"
+    className: "operator simple",
+    type: "operator"
   },
   {
     display: "7",
@@ -32,7 +35,8 @@ export default [
   {
     display: "X",
     id: "multiply",
-    className: "operator simple"
+    className: "operator simple",
+    type: "operator"
   },
   {
     display: "4",
@@ -52,7 +56,8 @@ export default [
   {
     display: "-",
     id: "substract",
-    className: "operator simple"
+    className: "operator simple",
+    type: "operator"
   },
   {
     display: "1",
@@ -72,7 +77,8 @@ export default [
   {
     display: "+",
     id: "add",
-    className: "operator simple"
+    className: "operator simple",
+    type: "operator"
   },
   {
     display: "0",
@@ -87,6 +93,7 @@ export default [
   {
     display: "=",
     id: "equals",
-    className: "operator simple"
+    className: "operator simple",
+    type: "operator"
   }
 ];
