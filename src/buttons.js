@@ -63,7 +63,7 @@ export default [
     display: "-",
     id: "subtract",
     className: "operator simple",
-    type: "operator"
+    type: "subtract"
   },
   {
     display: "1",

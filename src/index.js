@@ -35,12 +35,17 @@ function App() {
     document.title = `${projectName} | jmarcm`;
   });
 
+  function getLastTerm() {
+    return formula.slice(-1)[0];
+  }
+
   function handleNumber(value) {
+    console.log("buffer in number: ", buffer);
     if (value === "." && buffer === 0) {
       value = "0.";
     }
     //const regex = /^(?:0*)(\d+)|(\d+)|(0)$/gm;
-    const regex = /^(?:0*)(\d+\.?\d*)/gm;
+    const regex = /^(?:0*)(-?\d+\.?\d*)/gm;
     let str = buffer + value;
     let m = regex.exec(str);
     console.log("m1: ", m[1]);
@@ -55,6 +60,7 @@ function App() {
     setDisplay(0);
     setBuffer(0);
     setFormula([]);
+    console.clear();
   }
 
   function handleClearLast() {
@@ -92,6 +98,23 @@ function App() {
     }
   }
 
+  function handleSubtract(value) {
+    console.log("formula start: ", formula);
+
+    const operators = ["X", "÷"];
+    const lastTerm = getLastTerm();
+    console.log("lastTerm: ", lastTerm);
+    console.log(operators.includes(lastTerm));
+    if (operators.includes(lastTerm)) {
+      setBuffer("-");
+      console.log("buffer subtract: ", buffer);
+      console.log(formula);
+      setDisplay("-");
+    } else {
+      handleOperator(value);
+    }
+  }
+
   return (
     <div className="App">
       <h1>{projectName}</h1>
@@ -107,6 +130,7 @@ function App() {
               button={button}
               number={handleNumber}
               operator={handleOperator}
+              subtract={handleSubtract}
               clearAll={handleClearAll}
               clearLast={handleClearLast}
             />
