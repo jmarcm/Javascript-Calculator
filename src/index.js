@@ -43,13 +43,22 @@ function App() {
     const regex = /^(?:0*)(\d+\.?\d*)/gm;
     let str = buffer + value;
     let m = regex.exec(str);
-    setDisplay(m[1]);
+    console.log("m1: ", m[1]);
+    //setDisplay(m[1]);
     setBuffer(m[1]);
+    setDisplay(m[1]);
+
+    console.log("buffer: ", buffer);
   }
 
   function handleClearAll() {
     setDisplay(0);
+    setBuffer(0);
     setFormula([]);
+  }
+
+  function handleClearLast() {
+    return;
   }
 
   function handleOperator(value) {
@@ -88,7 +97,9 @@ function App() {
       <h1>{projectName}</h1>
       <div className="Calculator">
         <div id="display">{display}</div>>
-        <div className="formula">{formula}</div>
+        <div className="formula">
+          buffer: {buffer} || {formula}
+        </div>
         <div className="buttons">
           {buttons.map((button, index) => (
             <Button
@@ -97,6 +108,7 @@ function App() {
               number={handleNumber}
               operator={handleOperator}
               clearAll={handleClearAll}
+              clearLast={handleClearLast}
             />
           ))}
         </div>
