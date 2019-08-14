@@ -43,14 +43,22 @@ function App() {
   function handleNumber(value) {
     console.log("buffer in number: ", buffer);
     console.log("formula: ", formula);
+    console.log("last operator: ", lastOperator);
+
+    let localBuffer = buffer;
+
+    if (lastOperator === "=") {
+      localBuffer = 0;
+      console.log(buffer);
+    }
 
     // deals with decimal
-    if (value === "." && buffer === 0) {
+    if (value === "." && localBuffer === 0) {
       value = "0.";
     }
     //const regex = /^(?:0*)(\d+)|(\d+)|(0)$/gm;
     const regex = /^(?:0*)(-?\d+\.?\d*)/gm;
-    let str = buffer + value;
+    let str = localBuffer + value;
     let m = regex.exec(str);
     console.log("m1: ", m[1]);
     //setDisplay(m[1]);
@@ -81,10 +89,10 @@ function App() {
       //formula.push(buffer);
       console.log("formula start operator: ", formula);
 
-      if (lastOperator !== null) {
-        setFormula(formula.pop());
-      } else {
+      if (!lastOperator || lastOperator === "=") {
         formula.push(buffer);
+      } else {
+        setFormula(formula.pop());
       }
 
       setLastOperator(value);
@@ -138,10 +146,12 @@ function App() {
     let result = Math.round(10000 * eval(calculs)) / 10000;
     setDisplay(result);
 
-    // reset
+    setLastOperator(value);
     setFormula([]);
     setBuffer(result);
 
+    console.log("value: ", value);
+    console.log("last operator in equals: ", lastOperator);
     console.log("result: ", result);
   }
 
@@ -151,7 +161,9 @@ function App() {
       <div className="Calculator">
         <div className="formula">{formula}</div>
         <div id="display">{display}</div>>
-        <div className="formula">{lastOperator}</div>
+        <div className="formula">
+          buffer {buffer} || {lastOperator}
+        </div>
         <div className="buttons">
           {buttons.map((button, index) => (
             <Button
