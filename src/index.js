@@ -43,6 +43,8 @@ function App() {
   function handleNumber(value) {
     console.log("buffer in number: ", buffer);
     console.log("formula: ", formula);
+
+    // deals with decimal
     if (value === "." && buffer === 0) {
       value = "0.";
     }
@@ -93,7 +95,6 @@ function App() {
       setDisplay("");
 
       console.log("formula operator: ", formula);
-    } else {
     }
   }
 
@@ -104,7 +105,7 @@ function App() {
     console.log("formula start: ", formula);
     console.log("buffer start: ", buffer);
 
-    const operators = ["X", "÷"];
+    const operators = ["x", "÷"];
     const lastTerm = getLastTerm();
     console.log("lastTerm: ", lastTerm);
     console.log(operators.includes(lastTerm));
@@ -122,7 +123,6 @@ function App() {
   }
 
   function handleEquals(value) {
-    // dealr with equals
     formula.push(buffer);
     setFormula(formula);
 
@@ -140,7 +140,7 @@ function App() {
 
     // reset
     setFormula([]);
-    setBuffer(0);
+    setBuffer(result);
 
     console.log("result: ", result);
   }
@@ -149,11 +149,9 @@ function App() {
     <div className="App">
       <h1>{projectName}</h1>
       <div className="Calculator">
-        <div id="display">{display}</div>>
-        <div className="formula">
-          buffer: {buffer} || lastOperator: {lastOperator}
-        </div>
         <div className="formula">{formula}</div>
+        <div id="display">{display}</div>>
+        <div className="formula">{lastOperator}</div>
         <div className="buttons">
           {buttons.map((button, index) => (
             <Button

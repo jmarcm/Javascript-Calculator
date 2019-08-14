@@ -3,6 +3,11 @@
   text-align: center;
 }
 
+h1 {
+  margin: 0.3em 0;
+  font-size: 1.7em;
+}
+
 .Calculator {
   width: 350px;
   margin: 0 auto;
@@ -60,5 +65,9 @@ button.double {
 }
 
 .formula {
+  height: 1.5em;
+  line-height: 1.5em;
+  background: darkslategray;
+  font-size: 0.8em;
   color: white;
 }

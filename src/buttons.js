@@ -36,7 +36,7 @@ export default [
     type: "number"
   },
   {
-    display: "X",
+    display: "x",
     id: "multiply",
     className: "operator simple",
     type: "operator"
