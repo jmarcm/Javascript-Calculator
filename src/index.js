@@ -27,9 +27,12 @@ function Button(props) {
 }
 
 function App() {
-  const [display, setDisplay] = useState(0);
   const [buffer, setBuffer] = useState(0);
+  const [operatorList, setOperatorList] = useState([]);
+  const [lastOperator, setLastOperator] = useState(null);
   const [formula, setFormula] = useState([]);
+
+  const [display, setDisplay] = useState(0);
 
   useEffect(() => {
     document.title = `${projectName} | jmarcm`;
@@ -41,6 +44,7 @@ function App() {
 
   function handleNumber(value) {
     console.log("buffer in number: ", buffer);
+    console.log("formula: ", formula);
     if (value === "." && buffer === 0) {
       value = "0.";
     }
@@ -53,12 +57,16 @@ function App() {
     setBuffer(m[1]);
     setDisplay(m[1]);
 
+    setLastOperator(null);
+
     console.log("buffer: ", buffer);
   }
 
   function handleClearAll() {
     setDisplay(0);
     setBuffer(0);
+    setOperatorList([]);
+    setLastOperator(null);
     setFormula([]);
     console.clear();
   }
@@ -69,12 +77,34 @@ function App() {
 
   function handleOperator(value) {
     if (value !== "=") {
-      formula.push(buffer);
+      console.log("handleOperator");
+      const operators = ["X", "÷", "+", "-"];
+      if (operators.includes(operatorList.slice(-1)[0])) {
+      }
+
+      const newOperatorList = [...operatorList, value];
+      setOperatorList(newOperatorList);
+
+      console.log("operatorList: ", operatorList);
+
+      //formula.push(buffer);
+      console.log("formula start operator: ", formula);
+      if (lastOperator !== null) {
+        setFormula(formula.pop());
+      } else {
+        formula.push(buffer);
+      }
+
+      setLastOperator(value);
+
       formula.push(value);
       setFormula(formula);
       setBuffer(0);
       setDisplay("");
+
+      console.log("formula operator: ", formula);
     } else {
+      // dealr with equals
       formula.push(buffer);
       setFormula(formula);
 
@@ -99,19 +129,28 @@ function App() {
   }
 
   function handleSubtract(value) {
+    if (buffer !== 0) {
+      formula.push(buffer);
+    }
     console.log("formula start: ", formula);
+    console.log("buffer start: ", buffer);
 
     const operators = ["X", "÷"];
     const lastTerm = getLastTerm();
     console.log("lastTerm: ", lastTerm);
     console.log(operators.includes(lastTerm));
-    if (operators.includes(lastTerm)) {
+    if (operators.includes(lastTerm) || formula.length === 0) {
       setBuffer("-");
       console.log("buffer subtract: ", buffer);
       console.log(formula);
       setDisplay("-");
     } else {
-      handleOperator(value);
+      //handleOperator(value);
+
+      formula.push(value);
+      setFormula(formula);
+      setBuffer(0);
+      setDisplay("");
     }
   }
 
@@ -121,8 +160,10 @@ function App() {
       <div className="Calculator">
         <div id="display">{display}</div>>
         <div className="formula">
-          buffer: {buffer} || {formula}
+          buffer: {buffer} || operatorList: {operatorList} || lastOperator:{" "}
+          {lastOperator}
         </div>
+        <div className="formula">{formula}</div>
         <div className="buttons">
           {buttons.map((button, index) => (
             <Button
