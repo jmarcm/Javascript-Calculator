@@ -28,10 +28,8 @@ function Button(props) {
 
 function App() {
   const [buffer, setBuffer] = useState(0);
-  const [operatorList, setOperatorList] = useState([]);
   const [lastOperator, setLastOperator] = useState(null);
   const [formula, setFormula] = useState([]);
-
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
@@ -65,7 +63,6 @@ function App() {
   function handleClearAll() {
     setDisplay(0);
     setBuffer(0);
-    setOperatorList([]);
     setLastOperator(null);
     setFormula([]);
     console.clear();
@@ -78,17 +75,10 @@ function App() {
   function handleOperator(value) {
     if (value !== "=") {
       console.log("handleOperator");
-      const operators = ["X", "÷", "+", "-"];
-      if (operators.includes(operatorList.slice(-1)[0])) {
-      }
-
-      const newOperatorList = [...operatorList, value];
-      setOperatorList(newOperatorList);
-
-      console.log("operatorList: ", operatorList);
 
       //formula.push(buffer);
       console.log("formula start operator: ", formula);
+
       if (lastOperator !== null) {
         setFormula(formula.pop());
       } else {
@@ -104,27 +94,6 @@ function App() {
 
       console.log("formula operator: ", formula);
     } else {
-      // dealr with equals
-      formula.push(buffer);
-      setFormula(formula);
-
-      // clean formula
-      console.log("formula: ", formula);
-
-      let calculs = formula.join("");
-      calculs = calculs.replace(/X/gi, "*");
-      calculs = calculs.replace(/÷/gi, "/");
-      console.log(calculs);
-
-      // calculate
-      let result = Math.round(10000 * eval(calculs)) / 10000;
-      setDisplay(result);
-
-      // reset
-      setFormula([]);
-      setBuffer(0);
-
-      console.log("result: ", result);
     }
   }
 
@@ -145,13 +114,35 @@ function App() {
       console.log(formula);
       setDisplay("-");
     } else {
-      //handleOperator(value);
-
       formula.push(value);
       setFormula(formula);
       setBuffer(0);
       setDisplay("");
     }
+  }
+
+  function handleEquals(value) {
+    // dealr with equals
+    formula.push(buffer);
+    setFormula(formula);
+
+    // clean formula
+    console.log("formula: ", formula);
+
+    let calculs = formula.join("");
+    calculs = calculs.replace(/X/gi, "*");
+    calculs = calculs.replace(/÷/gi, "/");
+    console.log(calculs);
+
+    // calculate
+    let result = Math.round(10000 * eval(calculs)) / 10000;
+    setDisplay(result);
+
+    // reset
+    setFormula([]);
+    setBuffer(0);
+
+    console.log("result: ", result);
   }
 
   return (
@@ -160,8 +151,7 @@ function App() {
       <div className="Calculator">
         <div id="display">{display}</div>>
         <div className="formula">
-          buffer: {buffer} || operatorList: {operatorList} || lastOperator:{" "}
-          {lastOperator}
+          buffer: {buffer} || lastOperator: {lastOperator}
         </div>
         <div className="formula">{formula}</div>
         <div className="buttons">
@@ -172,6 +162,7 @@ function App() {
               number={handleNumber}
               operator={handleOperator}
               subtract={handleSubtract}
+              equals={handleEquals}
               clearAll={handleClearAll}
               clearLast={handleClearLast}
             />

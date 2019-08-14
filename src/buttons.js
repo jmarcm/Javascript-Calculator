@@ -105,6 +105,6 @@ export default [
     display: "=",
     id: "equals",
     className: "operator simple",
-    type: "operator"
+    type: "equals"
   }
 ];
